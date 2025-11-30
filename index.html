@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lyrics Player</title>
+  <style>
+    /* Add some basic styling to your lyrics */
+    #lyrics {
+      font-size: 24px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <audio id="audio" src="ronsample.mp3" autoplay></audio>
+  <div id="lyrics"></div>
+
+  <script>
+    // Define your lyrics with timestamps (in seconds)
+    const lyrics = [
+      { time: 0, text: "Your first lyric line" },
+      { time: 5, text: "Your second lyric line" },
+      { time: 10, text: "Your third lyric line" },
+      // Add more lyrics here...
+    ];
+
+    // Get the audio and lyrics elements
+    const audio = document.getElementById('audio');
+    const lyricsDiv = document.getElementById('lyrics');
+
+    // Function to update lyrics
+    function updateLyrics() {
+      const currentTime = audio.currentTime;
+      const currentLyric = lyrics.find((lyric) => currentTime >= lyric.time && (!lyric.endTime || currentTime < lyric.endTime));
+      if (currentLyric) {
+        lyricsDiv.innerText = currentLyric.text;
+      }
+    }
+
+    // Update lyrics every second
+    setInterval(updateLyrics, 1000);
+  </script>
+</body>
+</html>
