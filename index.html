@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,6 @@
 <body>
   <audio id="audio" src="ronsample.mp3" autoplay></audio>
   <div id="lyrics"></div>
-
   <script>
     // Define your lyrics with timestamps (in seconds)
     const lyrics = [
@@ -30,16 +30,13 @@
     const lyricsDiv = document.getElementById('lyrics');
 
     // Function to update lyrics
-    function updateLyrics() {
+    audio.addEventListener('timeupdate', () => {
       const currentTime = audio.currentTime;
       const currentLyric = lyrics.find((lyric) => currentTime >= lyric.time && (!lyric.endTime || currentTime < lyric.endTime));
       if (currentLyric) {
         lyricsDiv.innerText = currentLyric.text;
       }
-    }
-
-    // Update lyrics every second
-    setInterval(updateLyrics, 1000);
+    });
   </script>
 </body>
 </html>
