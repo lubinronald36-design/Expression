@@ -2,22 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lyrics Player</title>
-  <style>
-    /* Add some basic styling to your lyrics */
-    #lyrics {
-      font-size: 24px;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
-    }
-  </style>
+  <title>Expression</title>
 </head>
 <body>
-  <audio id="audio" src="ronsample.mp3" autoplay></audio>
-  <div id="lyrics"></div>
-  <script>
-    // Define your lyrics with timestamps (in seconds)
+  <audio controls autoplay>
+    <source src="ronsample.mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+</body>
+</html>
     const lyrics = [
       { time: 0, text: "Your first lyric line" },
       { time: 5, text: "Your second lyric line" },
