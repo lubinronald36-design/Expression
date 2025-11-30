@@ -1,42 +1,12 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Expression</title>
+  <title>Audio Player</title>
 </head>
 <body>
-  <audio id="audio" controls autoplay>
-    <source src="ronsample.m4a" type="audio/m4a">
+  <audio controls>
+    <source src="rec.mp3" type="audio/mpeg">
     Your browser does not support the audio tag.
   </audio>
-  <div id="lyrics"></div>
-
-  <script>
-    const lyrics = [
-      { time: 0, text: "Your first lyric line" },
-      { time: 5, text: "Your second lyric line" },
-      { time: 10, text: "Your third lyric line" },
-      // Add more lyrics here...
-    ];
-
-   const audio = document.getElementById('audio');
-const lyricsDiv = document.getElementById('lyrics');
-
-if (audio && lyricsDiv) {
-  audio.addEventListener('timeupdate', () => {
-    const currentTime = audio.currentTime;
-    const currentLyric = lyrics.find((lyric, index) => {
-      const nextLyric = lyrics[index + 1];
-      const endTime = nextLyric ? nextLyric.time : Infinity;
-      return currentTime >= lyric.time && currentTime < endTime;
-    });
-
-    if (currentLyric) {
-      lyricsDiv.innerText = currentLyric.text;
-    } else {
-      lyricsDiv.innerText = '';
-    }
-  });
-} else {
-  console.error("Audio or lyrics element not found.");
-}
+</body>
+</html>
