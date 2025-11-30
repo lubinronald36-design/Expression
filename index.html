@@ -5,12 +5,13 @@
   <title>Expression</title>
 </head>
 <body>
- <audio controls autoplay>
-  <source src="ronsample.m4a" type="audio/m4a">
-  Your browser does not support the audio tag.
-</audio>
-</body>
-</html>
+  <audio id="audio" controls autoplay>
+    <source src="ronsample.m4a" type="audio/m4a">
+    Your browser does not support the audio tag.
+  </audio>
+  <div id="lyrics"></div>
+
+  <script>
     const lyrics = [
       { time: 0, text: "Your first lyric line" },
       { time: 5, text: "Your second lyric line" },
@@ -18,16 +19,16 @@
       // Add more lyrics here...
     ];
 
-    // Get the audio and lyrics elements
     const audio = document.getElementById('audio');
     const lyricsDiv = document.getElementById('lyrics');
 
-    // Function to update lyrics
     audio.addEventListener('timeupdate', () => {
       const currentTime = audio.currentTime;
-      const currentLyric = lyrics.find((lyric) => currentTime >= lyric.time && (!lyric.endTime || currentTime < lyric.endTime));
+      const currentLyric = lyrics.find((lyric) => currentTime >= lyric.time && (!lyric.endTime || currentTime < (lyric.endTime || lyric.time + 5)));
       if (currentLyric) {
         lyricsDiv.innerText = currentLyric.text;
+      } else {
+        lyricsDiv.innerText = '';
       }
     });
   </script>
