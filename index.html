@@ -19,18 +19,24 @@
       // Add more lyrics here...
     ];
 
-    const audio = document.getElementById('audio');
-    const lyricsDiv = document.getElementById('lyrics');
+   const audio = document.getElementById('audio');
+const lyricsDiv = document.getElementById('lyrics');
 
-    audio.addEventListener('timeupdate', () => {
-      const currentTime = audio.currentTime;
-      const currentLyric = lyrics.find((lyric) => currentTime >= lyric.time && (!lyric.endTime || currentTime < (lyric.endTime || lyric.time + 5)));
-      if (currentLyric) {
-        lyricsDiv.innerText = currentLyric.text;
-      } else {
-        lyricsDiv.innerText = '';
-      }
+if (audio && lyricsDiv) {
+  audio.addEventListener('timeupdate', () => {
+    const currentTime = audio.currentTime;
+    const currentLyric = lyrics.find((lyric, index) => {
+      const nextLyric = lyrics[index + 1];
+      const endTime = nextLyric ? nextLyric.time : Infinity;
+      return currentTime >= lyric.time && currentTime < endTime;
     });
-  </script>
-</body>
-</html>
+
+    if (currentLyric) {
+      lyricsDiv.innerText = currentLyric.text;
+    } else {
+      lyricsDiv.innerText = '';
+    }
+  });
+} else {
+  console.error("Audio or lyrics element not found.");
+}
